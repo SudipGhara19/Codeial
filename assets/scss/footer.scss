@@ -1,0 +1,19 @@
+footer{
+    display: flex;
+    justify-content:center;
+    background-color: rgb(79, 79, 79);
+    p{
+        color: rgb(204, 202, 202);
+    }
+    ul{
+        list-style: none;
+        display: flex;
+        li{
+            padding-left: 5px;
+            padding-right: 5px;
+            a{
+                color: rgb(255, 47, 0);
+            }
+        }
+    }
+}

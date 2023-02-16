@@ -1,0 +1,24 @@
+#header-all #container {
+  background-color: #ff2f00;
+  height: 60px;
+  display: flex;
+  justify-content: space-between; }
+  #header-all #container p {
+    margin-top: 5px;
+    margin-left: 5px;
+    color: white;
+    font-weight: 600;
+    font-family: sans-serif;
+    font-size: 40px; }
+  #header-all #container ul {
+    list-style: none;
+    display: flex;
+    margin-top: 10px;
+    margin-right: 5px; }
+    #header-all #container ul li {
+      font-family: sans-serif;
+      color: white;
+      size: 10px;
+      padding: 5px; }
+      #header-all #container ul li a {
+        color: white; }
