@@ -1,52 +1,65 @@
+<script src="https://kit.fontawesome.com/256981549a.js" crossorigin="anonymous"></script>
+<h1>
+    Codeial / <%= title %>
+</h1>
 
-        <h1>
-            Codeial / <%= title %>
-        </h1>
 
-        <section  id="feed-posts">
-            <h1>Posts</h1>
-            <% if(locals.user){ %>
-            <form action="/posts/create" id="new-post-form" method="post">
-                <textarea name="content"  cols="30" rows="3" placeholder="Type here..." required></textarea>
-                <input type="submit" value="Post">
-            </form>
-            <% } %>
-            <div id="posts-list-container">
-                <ul>
-                    <% for(post of posts){ %>
-                        <li>
+<section id="feed-posts">
+    <h4>Posts</h4>
+    <% if(locals.user){ %>
+    <form action="/posts/create" id="new-post-form" method="POST">
+        <textarea name="content" cols="30" rows="3" placeholder="Type Here..." required></textarea>
+        <input type="submit" value="Post">
+    </form>
+    <% } %>
+
+    <div id="posts-list-container">
+        <ul>
+            <% for(post of posts){ %>
+                
+            <li>
+                <p>
+                    
+                    <%= post.content %>
+                    <% if (locals.user && locals.user.id == post.user.id){ %>
+                        <small>
+                            <a href="/posts/destroy/<%= post.id %>"><i class="fa-solid fa-trash-can"></i></a>
+                        </small>
+                        <% } %>
+                    <br>
+                    <small>
+                        <%= post.user.name %>
+                    </small>
+                </p>
+                <div class="post-comments">
+                    <% if (locals.user){ %>
+                        <form action="/comments/create" method="POST">
+                            <input type="text" name="content" placeholder="Type Here to add comment..." required>
+                            <input type="hidden" name="post" value="<%= post._id %>" >
+                            <input type="submit" value="Add Comment">
+                        </form>
+
+                    <% } %>
+
+                    <div class="post-comments-list">
+                        <ul id="post-comments-<%= post._id %>">
+                            <% for (comment of post.comments){%>
+                                
                             <p>
-                                <%= post.content %>
+                                <%= comment.content %>
                                 <br>
                                 <small>
-                                    <%= post.user.name %>
+                                    <%= comment.user.name %>
                                 </small>
-                            </p>
-                            <div class="post-comments">
-                                <% if(locals.user){ %>
-                                    <form action="/comments/create" method="post">
-                                        <input type="text" name="content" placeholder="Add comment..." required>
-                                        <input type="hidden" name="post" value="<%= post._id %>">
-                                        <input type="submit" value="Add Comment">
-                                    </form>
-                                <% } %>
-
-                                <div id="post-comments-list">
-                                    <ul id="post-comments-<%= post._id %>">
-                                        <% for (comment of post.comments){ %>
-                                            <p>
-                                                <%= comment.content %>
-                                                <br>
-                                                <small>
-                                                    <%= comment.user.name %>
-                                                </small>
-                                            </p>
-                                        <% } %>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                    <% } %>
-                </ul>
-            </div>
-        </section>
+                            </p>    
+                            <%} %>
+                        </ul>
+                    </div>
+                </div>
+                
+            </li>
+                
+            <%} %>
+        </ul>
+    </div>
+</section>
