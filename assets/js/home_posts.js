@@ -1,7 +1,8 @@
 {
     //method to submit the post form using AJAX
-    let creatPost = function(){
+    let createPost = function(){
         let newPostForm = $('#new-post-form');
+
         newPostForm.submit(function(e){
             e.preventDefault();
 
@@ -10,10 +11,10 @@
                 url: '/posts/create',
                 data: newPostForm.serialize(),
                 success: function(data){
-                    let newPost = newPostDOM(data.data.post);
+                    let newPost = newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
-                },
-                error: function(error){
+                    deletePost($(' .delete-post-button', newPost));
+                }, error: function(error){
                     console.log(error.responseText);
                 }
             });
@@ -29,7 +30,7 @@
                         ${post.content}
                         
                             <small>
-                                <a id="delete-post-button" href="/posts/destroy/${post.id}"><i class="fa-solid fa-trash-can"></i></a>
+                                <a id="delete-post-button" href="/posts/destroy/${post._id}"><i class="fa-solid fa-trash-can"></i></a>
                             </small>
                         
                         <br>
@@ -57,6 +58,26 @@
                 </li>`)
     }
 
+
+
+
+    //Method to delete a post via DOM
+    let deletePost = function(deleteLink){
+        $(deleteLink).click(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: 'get',
+                url: $(deleteLink).prop('href'),
+                success: function(data){
+                    $(`#post-${data.data.post_id}`).remove();
+                },
+                error: function(error){
+                    console.log(error.responseText);
+                }
+            })
+        })
+    }
 
 
     creatPost();
