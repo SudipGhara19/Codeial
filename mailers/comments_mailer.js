@@ -6,7 +6,7 @@ exports.newComment = (comment) => {
     console.log('inside newComment mailer', comment);
 
     nodeMailer.transporter.sendMail({
-       from: 'sudipghara533@gmail.com',
+       from: 'sudipghara135@gmail.com',
        to: comment.user.email,
        subject: "New Comment Published!",
        text: "Successfully Commented",
